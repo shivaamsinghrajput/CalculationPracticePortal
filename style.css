@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+}
+#mainCANVAS{
+    /* background-color: red; */
+}
+
+#base{
+    width: 100%;
+    height: 25px;
+    background-color: black;
+}
+.test{
+    width: 30%;
+    background-color: blue;
+    height: 100%;
+}
