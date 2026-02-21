@@ -1,14 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>The Paint Application</title>
-</head>
-<body>
-    <canvas id="mainCANVAS"></canvas>
-    <!-- <div id="base"></div> -->
-    <script src="backend.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Cascadia Code"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculation Practice Portal</title>
+  </head>
+  <body>
+    <div id="menu">
+    Number of questions: <input id="noqINPUT" type="text">
+    <br>
+    <button id="doneBTN">Done</button>
+    </div>
+    <div id="topHead">
+      <div id="totalCONT"><span>Total:‎ ‎ </span><span id="total">0</span></div>
+      <div id="leftCONT"><span>Left:‎ ‎ </span><span id="left">0</span></div>
+      <div id="mistakesCONT"><span>Mistakes:‎ ‎ </span><span id="mistakes">0</span></div>
+    </div>
+    <div id="usrINT">
+      <span id="qn">78 x 6 =</span
+      ><input id="ansBX" autocomplete="off" type="text" />
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
