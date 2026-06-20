@@ -2,20 +2,16 @@ topHead = document.getElementById("topHead");
 usrINT = document.getElementById("usrINT");
 
 totalEL = document.getElementById("total");
-leftEL = document.getElementById("left");
 mistakesEL = document.getElementById("mistakes");
 
 menu = document.getElementById("menu");
-noqINPUT = document.getElementById("noqINPUT");
-doneBTN = document.getElementById("doneBTN");
-let noq = 0;
-let noql = 0;
-doneBTN.onclick = () => {
-   val=noqINPUT.value
-   noq=val
-   noql=val
-   menu.style.display="none"
-   updateTopHead()
+userINPUT = document.getElementById("userINPUT");
+startBTN = document.getElementById("startBTN");
+let totalNoOfQues = 0;
+startBTN.onclick = () => {
+  totalNoOfQues = userINPUT.value || 10
+  menu.style.display = "none"
+  totalEL.innerHTML = totalNoOfQues
 };
 
 qnBX = document.getElementById("qn");
@@ -34,12 +30,12 @@ function getRandomIntInclusive(min, max) {
 }
 
 function getMultiplicationQues(d1, d2, tough = true) {
-  
-  if (tough && d2 == 1 && d1==2) {
-    nu1=getRandomIntInclusive(12,99)
+
+  if (tough && d2 == 1 && d1 == 2) {
+    nu1 = getRandomIntInclusive(12, 99)
     nu2 = getRandomIntInclusive(2, 9);
-    if(nu1%10==0){
-      nu1+=getRandomIntInclusive(2,9)
+    if (nu1 % 10 == 0) {
+      nu1 += getRandomIntInclusive(2, 9)
     }
   } else {
     nu1 = getRandomIntInclusive(10 ** (d1 - 1), 10 ** d1 - 1);
@@ -52,11 +48,8 @@ function getMultiplicationQues(d1, d2, tough = true) {
     nu2,
     answer,
   };
-  //   console.log(`${n1} x ${n2} = `);
-  //   console.log(ans);
 }
 
-// function testSession(d1,d2,operator, noOfQuestions, mistakeINC) {}
 function updateQnBx(sessionData) {
   let n1 = sessionData.nu1;
   let n2 = sessionData.nu2;
@@ -64,11 +57,6 @@ function updateQnBx(sessionData) {
   qnBX.innerHTML = `${done + 1}.  ${n1} ${operator} ${n2} = `;
 }
 
-function updateTopHead() {
-  totalEL.innerHTML = noq;
-  leftEL.innerHTML = noql;
-  mistakesEL.innerHTML = mistakes;
-}
 
 let mistakes = 0;
 
@@ -81,30 +69,30 @@ let sessionData = getMultiplicationQues(d1, d2);
 updateQnBx(sessionData);
 updateTopHead();
 
-firstINP=true
+
 addEventListener("input", () => {
   ans = sessionData.answer;
   if (ansBX.value == ans) {
-    noql -= 1;
+    // visuals
+    usrINT.style.backgroundColor = "#0e2";
+    setTimeout(() => {
+      usrINT.style.backgroundColor = "#fff";
+    }, 1000);
+
+    // new question gen.
     done += 1;
     sessionData = getMultiplicationQues(d1, d2);
     updateQnBx(sessionData);
-    updateTopHead();
     ansBX.value = "";
-  } else if (ansBX.value.length == ans.toString().length) {
-    mistakes += 1;
-    updateTopHead();
-    ansBX.value = "";
+  } else if (ansBX.value.length === ans.toString().length) {
+    // visuals
     usrINT.style.backgroundColor = "#ff3441";
     setTimeout(() => {
       usrINT.style.backgroundColor = "#fff";
-    }, 1500);
-  }
-
-  if (noql == 0 && !firstINP) {
-    usrINT.style.backgroundColor = "#0e2";
-  }
-  if(firstINP){
-    firstINP=false
+    }, 1000);
+    // inc. mistakes count
+    mistakes += 1;
+    mistakesEL.innerHTML = mistakes;
+    ansBX.value = "";
   }
 });
